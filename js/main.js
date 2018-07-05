@@ -15,7 +15,14 @@ function load(){
 	if(city === '' || city === undefined) {
 		city = 'Sydney'
 	}
+	loadByCityName(city);
+}
+load();
 
+function loadByCityName(city){
+	if(city === '' || city === undefined){ //if no city typed
+		city = 'Sydney';
+	}
 	var googleLocationURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='+city+'&key='+googleMapApiKey;
 	googleLocation.open('GET', googleLocationURL, true);
 	googleLocation.responseType = 'text';
@@ -31,10 +38,8 @@ function load(){
 	weatherForecast.open('GET', weatherForecastURL, true);
 	weatherForecast.responseType = 'text';
 	weatherForecast.send(null);
-
 }
-
-load();
+//loadByCityName('Sydney');
 
 //Get the Location lat and lng 
 googleLocation.onload = function() {
@@ -75,9 +80,26 @@ weatherForecast.onload = function() {
 			document.getElementById('r'+i+'c4').innerHTML = forecastdayArray[i].low.celsius;
 		}
 
-
 	} //end if
 }; //end function
+
+
+//auto complete places
+function initAutocomplete(){
+	var options = {
+  types: ['(cities)'],
+  componentRestrictions: {country: "au"}
+ };
+	var input=document.getElementById('city');
+	var autocomplete = new google.maps.places.Autocomplete(input,options);
+	google.maps.event.addListener(autocomplete, 'place_changed', function () {
+		var place = autocomplete.getPlace().address_components[0].long_name;
+		console.log("###############");
+		console.log(place);
+		loadByCityName(place);
+	});
+}
+
 
 //http://api.wunderground.com/api/f029e46fd0232d12/geolookup/conditions/forecast/q/Australia/Sydney.json
 
