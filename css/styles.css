@@ -177,6 +177,47 @@ footer {
   font-size: .9rem; }
 
 /* OTHER */
+
+.preloader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: #fff;
+}
+.preloader-animation {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  text-align: center;
+  background-color: inherit;
+  color: inherit;
+  opacity: 1;
+  transition: opacity 0.3s;
+  transform: translate3d(-50%,-50%,0);
+}
+
+.preloader-spinner {
+  border:5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top:5px solid #008000;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 0.86s infinite cubic-bezier(0.6,0.3,0.3,0.6);
+  animation: spin 0.86s infinite cubic-bezier(0.6,0.3,0.3,0.6);
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 div.keepOpen {
   clear: both; }
 
